@@ -1,0 +1,1 @@
+curl -X POST -H "Content-Type: application/json"  -d '{"key": "ege"}' localhost:8080/setKey
