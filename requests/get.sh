@@ -1,1 +1,1 @@
-curl -v 0.0.0.0:8080/getKey
+curl -v 0.0.0.0:8081/getKey
