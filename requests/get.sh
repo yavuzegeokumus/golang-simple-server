@@ -1,1 +1,1 @@
-curl -v 0.0.0.0:8081/getKey
+curl -v https://obscure-crag-63622.herokuapp.com/getKey

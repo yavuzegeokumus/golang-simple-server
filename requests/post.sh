@@ -1,1 +1,1 @@
-curl -X POST -H "Content-Type: application/json"  -d '{"key": "ege"}' localhost:8081/setKey
+curl -X POST -H "Content-Type: application/json"  -d '{"key": "ege"}' https://obscure-crag-63622.herokuapp.com/setKey
