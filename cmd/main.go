@@ -88,13 +88,14 @@ func saveKey(filename string, data string) {
 }
 
 func restoreKey() {
-	files, err := ioutil.ReadDir("/tmp/")
+
+	files, err := ioutil.ReadDir("tmp/")
 
 	check(err)
 
 	if len(files) > 0 {
 		backupFileName := files[len(files)-1].Name()
-		dat, err := os.ReadFile("/tmp/" + backupFileName)
+		dat, err := os.ReadFile("tmp/" + backupFileName)
 		check(err)
 
 		key.Key = string(dat)
@@ -116,7 +117,7 @@ func main() {
 			case <-ticker.C:
 				if key.Key != "" {
 					time := strconv.Itoa(int(time.Now().Unix()))
-					filename := "/tmp/" + time + "-data.txt"
+					filename := "tmp/" + time + "-data.txt"
 					saveKey(filename, key.Key)
 				}
 			case <-quit:
