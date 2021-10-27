@@ -1,1 +1,1 @@
-curl -X PUT -H "Content-Type: application/json"  -d '{"key": "ege"}' localhost:9000/setKey
+curl -X PUT -H "Content-Type: application/json"  -d '{"key": "ege"}' https://immense-ravine-94498.herokuapp.com/setKey
