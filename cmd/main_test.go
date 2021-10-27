@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-var domain = "http://localhost:9000"
+var domain = "https://immense-ravine-94498"
 
 func TestSetKey(t *testing.T) {
 	want := "{\"message\": \"key set\"}"
