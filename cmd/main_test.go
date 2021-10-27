@@ -8,11 +8,14 @@ import (
 	"testing"
 )
 
+var domain = "http://localhost:9000"
+
 func TestSetKey(t *testing.T) {
 	want := "{\"message\": \"key set\"}"
-
+	var endpoint = domain + "/setKey"
 	var jsonStr = []byte(`{"key":"test"}`)
-	req, err := http.NewRequest("POST", "http://localhost:8081/setKey", bytes.NewBuffer(jsonStr))
+
+	req, err := http.NewRequest("PUT", endpoint, bytes.NewBuffer(jsonStr))
 	if err != nil {
 		panic(err)
 	}
@@ -35,8 +38,9 @@ func TestSetKey(t *testing.T) {
 
 func TestGetKey(t *testing.T) {
 	want := "{\"message\": \"key get successful\", \"data\":\"test\"}"
+	var endpoint = domain + "/getKey"
 
-	req, err := http.NewRequest("GET", "http://localhost:8081/getKey", nil)
+	req, err := http.NewRequest("GET", endpoint, nil)
 
 	if err != nil {
 		panic(err)
@@ -46,6 +50,7 @@ func TestGetKey(t *testing.T) {
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
+
 	if err != nil {
 		panic(err)
 	}
@@ -53,13 +58,15 @@ func TestGetKey(t *testing.T) {
 
 	body, _ := ioutil.ReadAll(resp.Body)
 	got := string(body)
+
 	if want != got {
 		t.Errorf("got %q, wanted %q", got, want)
 	}
 }
 func TestSaveKey(t *testing.T) {
 	want := "test"
-	filename := "/testoutput/testfile.txt"
+	filename := "/tmp/testfile.txt"
+
 	saveKey(filename, want)
 
 	file, err := os.ReadFile(filename)
@@ -76,8 +83,9 @@ func TestSaveKey(t *testing.T) {
 }
 func TestFLush(t *testing.T) {
 	want := "{\"message\": \"key deleted\"}"
+	var endpoint = domain + "/flush"
 
-	req, err := http.NewRequest("DELETE", "http://localhost:8081/flush", nil)
+	req, err := http.NewRequest("DELETE", endpoint, nil)
 
 	if err != nil {
 		panic(err)
@@ -87,13 +95,16 @@ func TestFLush(t *testing.T) {
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
+
 	if err != nil {
 		panic(err)
 	}
+
 	defer resp.Body.Close()
 
 	body, _ := ioutil.ReadAll(resp.Body)
 	got := string(body)
+
 	if want != got {
 		t.Errorf("got %q, wanted %q", got, want)
 	}

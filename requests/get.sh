@@ -1,1 +1,1 @@
-curl -v https://obscure-crag-63622.herokuapp.com/getKey
+curl -v https://blooming-cove-12162.herokuapp.com/getKey

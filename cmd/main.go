@@ -24,7 +24,7 @@ func check(e error) {
 func setKey(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
-	if r.Method == "POST" {
+	if r.Method == "PUT" {
 
 		decoder := json.NewDecoder(r.Body)
 
@@ -67,6 +67,9 @@ func flush(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			w.Write([]byte(`{"message": "key deleted"}`))
 		}
+	} else {
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		w.Write([]byte(`{"message": "this method is not allowed"}`))
 	}
 }
 
@@ -88,14 +91,18 @@ func saveKey(filename string, data string) {
 }
 
 func restoreKey() {
+	path := "tmp/"
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		os.Mkdir(path, os.ModeDir|0755)
+	}
 
-	files, err := ioutil.ReadDir("tmp/")
+	files, err := ioutil.ReadDir(path)
 
 	check(err)
 
 	if len(files) > 0 {
 		backupFileName := files[len(files)-1].Name()
-		dat, err := os.ReadFile("tmp/" + backupFileName)
+		dat, err := os.ReadFile(path + backupFileName)
 		check(err)
 
 		key.Key = string(dat)
@@ -109,7 +116,7 @@ func main() {
 	http.HandleFunc("/getKey", getKey)
 	http.HandleFunc("/flush", flush)
 
-	ticker := time.NewTicker(25 * time.Second)
+	ticker := time.NewTicker(60 * 60 * time.Second)
 	quit := make(chan struct{})
 	go func() {
 		for {
