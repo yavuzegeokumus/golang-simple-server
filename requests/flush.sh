@@ -1,1 +1,1 @@
-curl -X DELETE localhost:8091/flush
+curl -X DELETE https://immense-ravine-94498/flush
