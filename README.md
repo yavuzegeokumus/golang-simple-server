@@ -1,5 +1,5 @@
 # golang-simple-server
-This project handles various requests to manipulate a key. Moreover it can backup and restore a key upon restarting. The app is also deployed at  [heroku.](https://immense-ravine-94498)
+This project handles various requests to manipulate a key. Moreover it can backup and restore a key upon restarting. The app is also deployed at  [heroku.](https://immense-ravine-94498.herokuapp.com/)
 # Running
 To run the project clone it to your local and go to the apps directory. Run 
 
@@ -39,7 +39,7 @@ curl -v https://immense-ravine-94498.herokuapp.com/getKey
 This endpoint only gets a delete request. It simply flushes the key at the server.
 
 ```
-curl -X DELETE https://immense-ravine-94498/flush
+curl -X DELETE https://immense-ravine-94498.herokuapp.com/flush
 ```
 
-The template requests can be seen in the requests directory in the project. Run the scripts to see the results. Do not forget to change the domain of the endpoint according to where you run the server. If at your local use "localhost:PORT", if at heroku use the provided heroku [url.](https://immense-ravine-94498)
+The template requests can be seen in the requests directory in the project. Run the scripts to see the results. Do not forget to change the domain of the endpoint according to where you run the server. If at your local use "localhost:PORT", if at heroku use the provided heroku [url.](https://immense-ravine-94498.herokuapp.com/)
